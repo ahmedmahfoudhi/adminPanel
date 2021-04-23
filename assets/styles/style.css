@@ -1,0 +1,41 @@
+.height600{
+    height : 600px;
+}
+
+.height200{
+    height: 20px;
+}
+
+
+.sizing{
+    margin: 50px 0 0 0;
+    padding : 0 0 0 10px;
+}
+.fixOverflow{
+    padding-top : 80px;
+}
+
+.removeBorder{
+    border:none;
+    color : red;
+}
+
+
+.list-group{
+    padding : 0;
+}
+
+.setFont{
+    font-size: 20px;
+}
+
+.styleImage{
+    border:1pc solid #000;
+    padding : 3px;
+    height : 280px;
+    width: 100%;
+}
+
+.remove{
+    display:none;
+}

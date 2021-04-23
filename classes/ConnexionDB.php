@@ -4,20 +4,25 @@
 class ConnexionDB
 {
     static private $_host = "localhost";
-    static private $_dbname = "user";
+    static private $_dbname = "adminpanel";
     static private $_user = "root";
     static private $_pwd = "";
     static private $_db = null;
 
 
     private function __construct(){
-        self::$_db = new PDO("mysqli:host=".self::$_host.";dbname:".self::$_dbname,self::$_user,self::$_pwd);
+        try{
+            self::$_db = new PDO("mysql:host=" . self::$_host . ";dbname=" . self::$_dbname . ";charset=utf8", self::$_user, self::$_pwd, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'));
+        }catch(PDOException $e){
+            echo "error ".$e->getMessage();
+        }
+
     }
 
-    static public function getInsatnce(){
-        if(self::$_db){
-            return self::$_db;
+    static public function getInstance(){
+        if(!self::$_db){
+            new ConnexionDB();
         }
-        return new ConnexionDB();
+        return (self::$_db);
     }
 }

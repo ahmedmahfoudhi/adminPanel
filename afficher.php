@@ -1,39 +1,38 @@
 <?php
 include_once "isAuthenticated.php";
 include_once "autoload.php";
-include_once "header.php";
-include_once "nav.php";
+include_once "fragments/header.php";
+include_once "fragments/nav.php";
 $aux = new PersonneRepository();
 $res = $aux->findAll();
 ?>
 
-<div class="container">
+<div class="fixOverflow container ">
     <div class="row">
-        <div class="col-4">
-            <div class="card" style="width: 18rem;">
-                <img src="assets/images/test1.jpg" class="card-img-top" alt="avatar">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <?php
+            foreach($res as $p){
+
+                ?>
+                <div class="col-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="assets/images/<?=$p['avatar']?>" class="styleImage remove card-img-top " alt="avatar">
+                        <div class="card-body">
+                            <h3 class="text-center"><?=$p['name']?></h3>
+                            <ul class="list-group">
+                                <li class="list-group-item removeBorder">Age : <?=$p['age']?></li>
+                                <li class="list-group-item removeBorder">Job : <?=$p['job']?></li>
+                                <li class="list-group-item removeBorder">Password : <?=$p['password']?></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card" style="width: 18rem;">
-                <img src="assets/images/test1.jpg" class="card-img-top" alt="avatar">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="card" style="width: 18rem;">
-                <img src="assets/images/test1.jpg" class="card-img-top" alt="avatar">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </div>
+        <?php
+            }
+        ?>
+
     </div>
 </div>
+</body>
+</html>
 
 

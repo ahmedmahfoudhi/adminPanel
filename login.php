@@ -1,57 +1,39 @@
 <?php
-    if(isset($_SESSION['name']))
-        header("location:index.php");
+    session_start();
+    if(isset($_SESSION['name'])){
+        header('location:index.php');
+    }
+
     $GLOBALS['title'] = "login";
-    include_ones "fragments/header.php";
+    include_once "fragments/header.php";
 ?>
 
-<form>
-    <div class="row mb-3">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-        <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail3">
-        </div>
-    </div>
-    <div class="row mb-3">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword3">
-        </div>
-    </div>
-    <fieldset class="row mb-3">
-        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-        <div class="col-sm-10">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                <label class="form-check-label" for="gridRadios1">
-                    First radio
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                <label class="form-check-label" for="gridRadios2">
-                    Second radio
-                </label>
-            </div>
-            <div class="form-check disabled">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                <label class="form-check-label" for="gridRadios3">
-                    Third disabled radio
-                </label>
-            </div>
-        </div>
-    </fieldset>
-    <div class="row mb-3">
-        <div class="col-sm-10 offset-sm-2">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck1">
-                <label class="form-check-label" for="gridCheck1">
-                    Example checkbox
-                </label>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center height600">
+            <div class="col-8 h-50 bd-highlight">
+                <?php
+                    if(isset($_GET['error']) && $_GET['error'] != ""){
+                        echo "<div class = 'text-danger'>".$_GET['error']."</div>";
+                    }
+                ?>
+                <form method="POST" action="processLogin.php">
+                    <div class="row mb-3">
+                        <label for="username" class="col-sm-2 col-form-label">Username</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control border border-secondary" name="name" id="username">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="password" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control border border-secondary" name="password" id="password">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Connecter</button>
+                </form>
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-</form>
+
 </body>
 </html>

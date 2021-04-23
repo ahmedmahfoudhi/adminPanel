@@ -6,33 +6,43 @@ class Repository
     private static $_db;
     private $_tableName;
     public function __construct($tableName){
-        self::$_db = ConnexionDB::getInsatnce();
+        self::$_db = ConnexionDB::getInstance();
         $this->_tableName = $tableName;
     }
 
     protected static function execQuery($query,$values,$type = 0){
+        self::$_db = ConnexionDB::getInstance();
         $response = self::$_db->prepare($query);
-        $response->execute($values);
-        if($type == 1){
-            return $response;
+        if($type == 0){
+            return $response->execute($values);
         }
-        return null;
+
+        $response->execute($values);
+        return $response;
     }
 
-    public function add($values){
-        $query = "INSERT INTO ".$this->_tableName."VALUES (,";
-        $query .= str_repeat("?,", count($values));
+    public function add($cols,$values){
+        $query = "INSERT INTO ".$this->_tableName;
+        $query .= "(" . $cols[0]."";
+        for($i = 1; $i < count($cols); ++$i){
+            $query .= ",".$cols[$i];
+        }
         $query .= ")";
-        $this->execQuery($query,$values,0);
+        $query .= " VALUES (";
+        $query .= str_repeat("?,", count($values)-1);
+        $query .= "?)";
+        return $this->execQuery($query,$values,0);
     }
     public function findOne($id){
-        $query = "SELECT * from".$this->_tableName." where id = ?";
-        return $this->execQuery($query,[$id],1);
+        $query = "SELECT * from ".$this->_tableName." where id = ?";
+        $res = $this->execQuery($query,[$id],1);
+        return $res->fetch(PDO::FETCH_ASSOC);
     }
 
     public function findAll(){
-        $query = "SELECT * from" . $this->_tableName;
-        return $this->execQuery($query,[],1);
+        $query = "SELECT * from " . $this->_tableName;
+        $res = $this->execQuery($query,[],1);
+        return $res->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function update($assocCriteria,$modifiedColumns,$newValues){
