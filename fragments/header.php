@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="node_modules/bootswatch/dist/lux/bootstrap.css">
-    <link rel="stylesheet" href="assets/styles/style.css">
+    <link rel="stylesheet" href="assets/styles/style.css?v=<?php echo time(); ?>">
     <title><?php echo ((isset($GLOBALS['title']) && $GLOBALS['title'] != "") ? $GLOBALS['title'] : "Home")?></title>
 </head>
 
