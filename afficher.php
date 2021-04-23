@@ -15,7 +15,7 @@ $res = $aux->findAll();
                 ?>
                 <div class="col-4">
                     <div class="card" style="width: 18rem;">
-                        <img src="assets/images/<?=$p['avatar']?>" class="styleImage remove card-img-top " alt="avatar">
+                        <img src="assets/images/<?=$p['avatar']?>" class="styleImage card-img-top " alt="avatar">
                         <div class="card-body">
                             <h3 class="text-center"><?=$p['name']?></h3>
                             <ul class="list-group">

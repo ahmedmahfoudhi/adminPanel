@@ -3,11 +3,7 @@ include_once "isAuthenticated.php";
 include_once "autoload.php";
 
 function isOk($var){
-    $check = isset($var) && $var != "";
-    if(!$check){
-        die(var_dump($var));
-    }
-    return $check;
+    return isset($var) && $var != "";
 }
 
 
